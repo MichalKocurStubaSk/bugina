@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/jetson/catkin_ws/devel/include/**",
+        "/home/jetson/catkin_ws/devel_isolated/mega_bot/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/jetson/catkin_ws/src/bugina/include/**",
+        "/home/jetson/catkin_ws/src/darknet_ros/darknet_ros/include/**",
+        "/home/jetson/catkin_ws/src/example_plugins_gazebo/include/**",
+        "/home/jetson/catkin_ws/src/myahrs_driver/include/**",
+        "/home/jetson/catkin_ws/src/pointCloudToLaserScan/include/**",
+        "/home/jetson/catkin_ws/src/upstart_test/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

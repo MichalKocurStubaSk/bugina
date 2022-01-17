@@ -1,0 +1,16 @@
+<launch>
+  <!--<include file="$(find rplidar_ros)/launch/rplidar.launch" />-->
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+ <!--<node pkg="rosbag" type="record" name="nahraj" 
+	args="record -o fredytmp -a"
+	/>-->
+<node name="buggyLaser"   pkg="bugina"  type="scan.py" output="screen"/>
+  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+  <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
+  <param name="serial_baudrate"     type="int"    value="115200"/>
+  
+  <param name="frame_id"            type="string" value="laser"/>
+  <param name="inverted"            type="bool"   value="false"/>
+  <param name="angle_compensate"    type="bool"   value="true"/>
+  </node>
+</launch>

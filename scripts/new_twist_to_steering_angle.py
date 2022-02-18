@@ -30,18 +30,21 @@ def callback1(data):
     
     angular_speed = data.angular.z
 
-    wheelbase = 1.1
+    wheelbase = 1.5
     steer_us = 1455
 
     if angular_speed == 0:
         steer_deg = 0
     else:
         radius = target_speed / angular_speed
-        steer_deg = math.degrees(math.atan(wheelbase / radius))
+        if radius == 0:
+            steer_deg = 0
+        else:
+            steer_deg = math.degrees(math.atan(wheelbase / radius))
         #steer_us = steer_deg * 16.12 + 1455
 
     
-    sender(float(steer_deg), float(target_speed))
+    sender(float(math.radians(steer_deg)), float(target_speed))
 
 rospy.Subscriber("cmd_vel", Twist, callback1)
 rospy.spin()

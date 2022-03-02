@@ -39,7 +39,7 @@ def wheelsCallback(wheels):
 
     wheelBase=1.5
     speed= (vR + vL)/ 2.0
-    v_th=speed*tan(wheelAngle)/ wheelBase
+    v_th=speed*math.tan(wheelAngle)/ wheelBase
     vx = speed
     vy = 0.0
     #odomMsg.twist.twist.linear.x = vx
@@ -49,7 +49,7 @@ def wheelsCallback(wheels):
     #odomMsg.child_frame_id = 'base_footprint'
 
     dTheta = v_th*(period.to_sec())
-    dS = vx*(period.to_sec()
+    dS = vx*(period.to_sec())
 
 
 
@@ -59,9 +59,9 @@ def wheelsCallback(wheels):
     #dS = (dRight+ dLeft)/2
     #vTheta = (speedRight - speedLeft)/(L)
     #dTheta = (dRight - dLeft)/(L)
-    
-    dX = dS * math.cos(Theta + (dTheta*0.5))
     dY = dS * math.sin(Theta + (dTheta*0.5))
+    dX = dS * math.cos(Theta + (dTheta*0.5))
+    
     X = X + dX
     Y = Y + dY
 
@@ -71,8 +71,8 @@ def wheelsCallback(wheels):
     vTheta = v_th#dTheta/(period.to_sec())
     Theta = Theta + dTheta
     #Theta = Theta % (2*math.pi)
-    print "speedLeft = ", speedLeft
-    print "speedRight = ", speedRight 
+    print "speedLeft = ", vL
+    print "speedRight = ", vR 
     print "x = " , X
     print "y = " , Y
     print "th= " , Theta

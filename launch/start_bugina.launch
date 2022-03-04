@@ -3,7 +3,7 @@
     <node name="opcua_client" pkg="opcua_ros_bridge" type="opcua_client_bugina.py" output="screen"/>
     <node name="opcua_sender" pkg="opcua_ros_bridge" type="opcua_sender_bugina.py" output="screen"/>
     <node name="twist_to_steer" pkg="bugina" type="new_twist_to_steering_angle.py" output="screen"/>
-    <node name="twist_to_steer" pkg="bugina" type="new_twist_to_steering_angle.py" output="screen"/>
+    
 
     
     <!--

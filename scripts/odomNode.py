@@ -18,6 +18,7 @@ Y = 0
 vX = 0
 vY = 0 
 seq = 0
+otackyMetre = 1.67
 
 
 def wheelsCallback(wheels):
@@ -33,12 +34,14 @@ def wheelsCallback(wheels):
     wheelAngle = wheels.data[0]
     vR = wheels.data[2]
     vL = wheels.data[1]
+    vS = wheels.data[3]
     #POZOR UWAGA, toto iba kym je iba lavy senzor
     vR=vL
     #KONIEC UWAGY
 
     wheelBase=1.5
     speed= (vR + vL)/ 2.0
+    speed= vS*otackyMetre
     v_th=speed*math.tan(wheelAngle)/ wheelBase
     vx = speed
     vy = 0.0
@@ -73,6 +76,7 @@ def wheelsCallback(wheels):
     #Theta = Theta % (2*math.pi)
     print "speedLeft = ", vL
     print "speedRight = ", vR 
+    print "speedShaft = ", vS 
     print "x = " , X
     print "y = " , Y
     print "th= " , Theta
@@ -114,7 +118,7 @@ if __name__ == '__main__':
     try:
         rospy.init_node('odom_from_speed', anonymous=True)
         lastMessageTime = rospy.get_rostime()
-        wheels_topic = "plcreadpub"
+        wheels_topic = "PLCreadpub"
         speed_subsciber = rospy.Subscriber(wheels_topic, Float32MultiArray, wheelsCallback)
         odom_publisher = rospy.Publisher('odom', Odometry, queue_size=10) 
         odom_broadcaster = tf.TransformBroadcaster()

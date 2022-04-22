@@ -1,14 +1,15 @@
 <launch>
-    <node name="joy_stick" pkg="rqt_robot_steering" type="rqt_robot_steering" output="screen"/>
+    <!--<node name="joy_stick" pkg="rqt_robot_steering" type="rqt_robot_steering" output="screen"/>-->
     <node name="opcua_client" pkg="opcua_ros_bridge" type="opcua_client_bugina.py" output="screen"/>
     <node name="opcua_sender" pkg="opcua_ros_bridge" type="opcua_sender_bugina.py" output="screen"/>
     <node name="twist_to_steer" pkg="bugina" type="new_twist_to_steering_angle.py" output="screen"/>
     
 
     
-    <!--
-    <node name="fakspeed" pkg="bugina" type="fakeSpe.py" output="screen"/>  
+    
+    <!--<node name="fakspeed" pkg="bugina" type="fakeSpe.py" output="screen"/>  -->
+    
     <node name="odomnode" pkg="bugina" type="odomNode.py" output="screen"/>  
     <node pkg="tf" type="static_transform_publisher" name="footprint_to_base_broadcaster" args="0 0 0.2032 0 0 0 base_footprint base_link 100"/>
-    -->
+    
 </launch>

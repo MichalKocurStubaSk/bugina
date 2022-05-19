@@ -10,7 +10,7 @@ import math
 import time
 import tf
 
-L = 0.66*1.5   #0.66  #rozhod kolies
+L = 1.5  #0.66  #rozhod kolies
 Ts =  0.02
 Theta = 0
 X = 0
@@ -31,7 +31,7 @@ def wheelsCallback(wheels):
     #print 'rearLeft = ', wheelSpd.rearLeft
     #print 'rearRight = ', wheelSpd.rearRight
 
-    wheelAngle = wheels.data[0]
+    wheelAngle = -1*wheels.data[0]
     vR = wheels.data[2]
     vL = wheels.data[1]
     vS = wheels.data[3]
@@ -40,8 +40,8 @@ def wheelsCallback(wheels):
     #KONIEC UWAGY
 
     wheelBase=1.5
-    speed= (vR + vL)/ 2.0
-    speed= vS*otackyMetre
+    #speed= (vR + vL)/ 2.0
+    speed= vS*otackyMetre*0.5 #toto je lebo to nejako nevychadzalo
     v_th=speed*math.tan(wheelAngle)/ wheelBase
     vx = speed
     vy = 0.0

@@ -74,17 +74,17 @@ def wheelsCallback(wheels):
     vTheta = v_th#dTheta/(period.to_sec())
     Theta = Theta + dTheta
     #Theta = Theta % (2*math.pi)
-    print "speedLeft = ", vL
-    print "speedRight = ", vR 
-    print "speedShaft = ", vS 
-    print "x = " , X
-    print "y = " , Y
-    print "th= " , Theta
-    print "ts= " , period.to_sec()
+    #print "speedLeft = ", vL
+    #print "speedRight = ", vR 
+    #print "speedShaft = ", vS 
+    #print "x = " , X
+    #print "y = " , Y
+    #print "th= " , Theta
+    #print "ts= " , period.to_sec()
   
   
     odom_quat = tf.transformations.quaternion_from_euler(0 , 0, Theta)
-    print "quat = " , odom_quat
+    #print "quat = " , odom_quat
     time = rospy.get_rostime()
 
     #transform tf

@@ -1,0 +1,61 @@
+<launch>
+    <!--<node name="joy_stick" pkg="rqt_robot_steering" type="rqt_robot_steering" output="screen"/>-->
+    <node name="opcua_client" pkg="opcua_ros_bridge" type="opcua_client_bugina.py" output="screen"/>
+    <node name="opcua_sender" pkg="opcua_ros_bridge" type="opcua_sender_bugina.py" output="screen"/>
+    <node name="twist_to_steer" pkg="bugina" type="new_twist_to_steering_angle.py" output="screen"/>
+    
+
+
+    
+    
+    <!--<node name="fakspeed" pkg="bugina" type="fakeSpe.py" output="screen"/>  -->
+    
+    <node name="odomnode" pkg="bugina" type="odomNode.py" output="screen"/>  
+    <node pkg="tf" type="static_transform_publisher" name="footprint_to_base_broadcaster" args="0 0 0.2032 0 0 0 base_footprint base_link 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="footprint_to_odom_broadcaster" args="0 0 0.3 0 0 0 base_footprint odom 100"/>
+     <node pkg="tf" type="static_transform_publisher" name="body_to_footprint_broadcaster" args="0 0 0.5 0 0 0 body base_footprint  100"/>
+     <node pkg="tf" type="static_transform_publisher" name="footprint_to_gps_broadcaster" args="0 0 0.5 0 0 0 base_footprint gps 100"/>
+     <node pkg="tf" type "static_transform_publisher" name "footprint_to_imu_broadcaster" args="0 0 0.6 0 0 0 base_footprint imu_link 100"/>
+   <node pkg="tf" type="static_transform_publisher" name="base_to_ins" args="0 0 0.5 0 0 0 base_link ins  100"/>
+
+    <!--GPS-->
+    <node name="gpstonavsafix" pkg="bugina" type="pubGPS.py" output="screen"/> 
+    <!--gpsozaj-->
+        <include file="$(find inertial_sense_ros)/launch/bug2.launch" />
+    
+     <!--Navsat -->
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+
+    <param name="magnetic_declination_radians" value="0"/>
+    <param name="yaw_offset" value="0"/>
+    <param name="zero_altitude" value="true"/>
+
+
+    
+    <param name="publish_filtered_gps" value="true"/>
+    <param name="broadcast_cartesian_transform" value="true"/>
+
+
+    <param name="use_odometry_yaw" value="false"/>
+    <param name="wait_for_datum" value="false"/>
+
+
+    <!--<remap from="/imu/data" to="/imu" /> -->
+    <!--<remap from="/gps/fix" to="/gps_new" />-->
+    <remap from="/odometry/filtered" to="/odom" />
+    </node>
+    
+  
+
+    <!-- Run the ekf for map to odom config
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_with_gps">
+        <rosparam command="load" file="$(find bugina)/config/gps_localization_config.yaml" />
+    </node>
+     -->
+     <!-- run map server 
+     <arg name="map_file" default="$(find gps_navigation)/maps/mymap_empty.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+-->
+
+
+</launch>

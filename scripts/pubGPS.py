@@ -11,7 +11,7 @@ class publishGPS(object):
 		rospy.loginfo("Initialising GPS publishing")
 		self.gps_sub=rospy.Subscriber('/gps',GPS, self.callback, queue_size=1)
 		self.lastMsg=GPS()
-		self.gps_pub=rospy.Publisher('/gps_new', NavSatFix, queue_size=1)
+		self.gps_pub=rospy.Publisher('/gps/fix', NavSatFix, queue_size=1)
 		rospy.sleep(8)
 		rospy.loginfo("initialised")
 
@@ -26,6 +26,7 @@ class publishGPS(object):
 		#rospy.loginfo(self.splitStrings[1])
 		gpsmsg.latitude=self.lastMsg.latitude
 		gpsmsg.longitude=self.lastMsg.longitude 
+		gpsmsg.position_covariance_type=0
 		self.gps_pub.publish(gpsmsg)
 
 	def run(self):

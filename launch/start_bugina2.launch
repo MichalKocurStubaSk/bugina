@@ -11,12 +11,18 @@
     <!--<node name="fakspeed" pkg="bugina" type="fakeSpe.py" output="screen"/>  -->
     
     <node name="odomnode" pkg="bugina" type="odomNode.py" output="screen"/>  
+    <node pkg="tf" type="static_transform_publisher" name="footprint_to_body_broadcaster" args="0 0 0 0 0 0 base_footprint body 100"/>
     <node pkg="tf" type="static_transform_publisher" name="footprint_to_base_broadcaster" args="0 0 0.2032 0 0 0 base_footprint base_link 100"/>
     <node pkg="tf" type="static_transform_publisher" name="footprint_to_odom_broadcaster" args="0 0 0.3 0 0 0 base_footprint odom 100"/>
      <node pkg="tf" type="static_transform_publisher" name="body_to_footprint_broadcaster" args="0 0 0.5 0 0 0 body base_footprint  100"/>
      <node pkg="tf" type="static_transform_publisher" name="footprint_to_gps_broadcaster" args="0 0 0.5 0 0 0 base_footprint gps 100"/>
-    
+     <node pkg="tf" type="static_transform_publisher" name="footprint_to_imu_broadcaster" args="0 0 0.6 0 0 0 base_footprint imu_link 100"/>
    <node pkg="tf" type="static_transform_publisher" name="base_to_ins" args="0 0 0.5 0 0 0 base_link ins  100"/>
+
+
+    <node name="imu" pkg="myahrs_driver" type="myahrs_driver">
+        <param name="port" value="/dev/ttyACM0" />
+    </node>
 
     <!--GPS-->
     <node name="gpstonavsafix" pkg="bugina" type="pubGPS.py" output="screen"/> 
@@ -31,16 +37,17 @@
     <param name="zero_altitude" value="true"/>
 
 
-    <param name="broadcast_utm_transform" value="false"/>
-    <param name="publish_filtered_gps" value="false"/>
+    
+    <param name="publish_filtered_gps" value="true"/>
+    <param name="broadcast_cartesian_transform" value="true"/>
 
 
     <param name="use_odometry_yaw" value="false"/>
     <param name="wait_for_datum" value="false"/>
 
 
-    <remap from="/imu/data" to="/imu" />
-    <remap from="/gps/fix" to="/gps_new" />
+    <!--<remap from="/imu/data" to="/imu" /> -->
+    <!--<remap from="/gps/fix" to="/gps_new" />-->
     <remap from="/odometry/filtered" to="/odom" />
     </node>
     
